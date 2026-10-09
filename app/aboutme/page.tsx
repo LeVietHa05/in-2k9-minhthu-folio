@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import ImageMaskHover from "../components/ImageMask";
 
 export default function Aboutme() {

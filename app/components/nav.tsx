@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const data = [
@@ -13,6 +14,7 @@ const data = [
 
 export default function NavBar() {
   const [showBorder, setShowBorder] = useState(true);
+  const pathname = usePathname();
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -29,7 +31,7 @@ export default function NavBar() {
 
   return (
     <header
-      className={`uppercase text-[30px] fixed top-0 left-0 right-0 w-screen  px-5 flex items-center justify-between gap-4 bg-[#FFFFED] border-y-[3px] transition-all duration-300 ${
+      className={`uppercase text-[30px] z-1000 fixed top-0 left-0 right-0 w-screen  px-5 flex items-center justify-between gap-4 bg-[#FFFFED] border-y-[3px] transition-all duration-300 ${
         showBorder ? "border-[#9A5A00] py-5" : "border-transparent py-1"
       }`}
     >
@@ -42,15 +44,23 @@ export default function NavBar() {
         </Link>
 
         <nav className="flex flex-wrap items-center justify-end border-3 border-[#9A5A00] rounded-full"> 
-          {data.map((item) => (
-            <Link
-              key={item.link}
-              href={item.link}
-              className="rounded-full  bg-[#FFFFED] text-[#9A5A00] px-4 py-2 whitespace-nowrap transition-colors hover:bg-[#9A5A00] hover:text-[#FFFFED] active:bg-[#9A5A00] active:text-[#FFFFED]"
-            >
-              {item.text}
-            </Link>
-          ))}
+          {data.map((item) => {
+            const isActive = pathname === item.link;
+            return (
+              <Link
+                key={item.link}
+                href={item.link}
+                aria-current={isActive ? "page" : undefined}
+                className={`rounded-full px-4 py-2 whitespace-nowrap transition-colors ${
+                  isActive
+                    ? "bg-[#9A5A00] text-[#FFFFED]"
+                    : "bg-[#FFFFED] text-[#9A5A00] hover:bg-[#9A5A00] hover:text-[#FFFFED]"
+                }`}
+              >
+                {item.text}
+              </Link>
+            );
+          })}
         </nav>
       </div>
     </header>
