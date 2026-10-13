@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 //font-[family-name:var(--font-actor)]
-export default function Sow() {
+export default function WeatherStorm() {
   return (
     <main className="max-w-7xl w-7xl mx-auto min-h-[calc(100svh-6rem)] mt-[2rem] ">
       <div className="relative z-2 min-h-[686px] text-left text-[266.47px] bg-[#889500] rounded-tr-[132px] rounded-bl-[132px] text-[#FFFFED] leading-[230px] overflow-hidden">
